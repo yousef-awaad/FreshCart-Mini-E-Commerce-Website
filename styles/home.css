@@ -1,0 +1,25 @@
+.arrow-btn {
+  border: none;
+  background: #ecf0ef;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.arrow-btn i {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.arrow-btn:hover {
+  background: #0aad0a;
+}
+
+.arrow-btn:hover i {
+  color: #fff;
+}

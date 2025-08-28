@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/restricted.js"></script>
+    <link rel="stylesheet" href="../styles/main.css" />
+    <title>Products - FreshCart</title>
+  </head>
+  <body>
+    <div class="border-bottom shadow-sm sticky-top">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container d-flex justify-content-between">
+          <a href="../index.html" class="navbar-brand">
+            <img src="../images/freshcart-logo.svg" alt="logo" />
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Products</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <button
+                  id="addProduct"
+                  class="btn btn-dark ms-lg-3 mt-3 mt-lg-0"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addProductModal"
+                >
+                  Add Product
+                </button>
+              </li>
+              <li class="nav-item">
+                <button id="logoutBtn" class="btn btn-danger ms-lg-3">
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <main>
+      <section class="my-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="rounded-3" style="background-color: #f0f3f2">
+                <div class="p-5">
+                  <h2 class="mb-0 fs-1 fw-semibold">Products</h2>
+                </div>
+              </div>
+
+              <!-- Title -->
+              <div class="row align-items-center mt-4">
+                <div class="col-6">
+                  <p class="fw-semibold text-secondary">
+                    <span id="product-count" class="text-black fw-bold">0</span>
+                    Products found
+                  </p>
+                </div>
+
+                <!-- Filter Dropdown -->
+                <div class="col-6 text-end">
+                  <div class="dropdown">
+                    <button
+                      class="form-control w-auto d-inline-block mb-3 rounded-3 text-secondary text-black text-secondary dropdown-toggle"
+                      type="button"
+                      id="sortDropdown"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Sort by: Featured
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                      <li>
+                        <a
+                          class="dropdown-item text-secondary"
+                          href="#"
+                          data-sort="featured"
+                          >Featured</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          class="dropdown-item text-secondary"
+                          href="#"
+                          data-sort="low"
+                          >Price: Low to High</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          class="dropdown-item text-secondary"
+                          href="#"
+                          data-sort="high"
+                          >Price: High to Low</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Products Grid -->
+              <div
+                class="row g-4 row-cols-2 row-cols-md-3 row-cols-lg-5"
+                id="productGrid"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div
+      class="modal fade"
+      id="addProductModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bold">Add New Product</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <section class="py-3">
+              <div class="container">
+                <form id="addProductForm" class="row g-4 p-3">
+                  <!-- Product Name -->
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold text-dark">
+                      Product Name <span class="text-danger">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="productName"
+                      class="form-control form-control-lg"
+                      required
+                    />
+                  </div>
+
+                  <!-- Category -->
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold text-dark">
+                      Category <span class="text-danger">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="productCategory"
+                      class="form-control form-control-lg"
+                      required
+                    />
+                  </div>
+
+                  <!-- Price -->
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold text-dark">
+                      Price <span class="text-danger">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      id="productPrice"
+                      class="form-control form-control-lg"
+                      step="0.01"
+                      required
+                    />
+                  </div>
+
+                  <!-- Old Price -->
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold text-dark">
+                      Old Price <span class="text-danger">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      id="productOldPrice"
+                      class="form-control form-control-lg"
+                      step="0.01"
+                      required
+                    />
+                  </div>
+
+                  <!-- Discount -->
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold text-dark"
+                      >Discount (optional)</label
+                    >
+                    <input
+                      type="text"
+                      id="productDiscount"
+                      class="form-control form-control-lg"
+                    />
+                  </div>
+
+                  <!-- Sale Tag -->
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold text-dark"
+                      >Sale Tag (optional)</label
+                    >
+                    <input
+                      type="text"
+                      id="productSale"
+                      class="form-control form-control-lg"
+                    />
+                  </div>
+
+                  <!-- Image Link -->
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold text-dark">
+                      Product Image URL <span class="text-danger">*</span>
+                    </label>
+                    <input
+                      type="url"
+                      id="productImageLink"
+                      class="form-control form-control-lg"
+                      placeholder="https://example.com/image.jpg"
+                      required
+                    />
+                  </div>
+
+                  <!-- Submit Button -->
+                  <div class="col-12 text-center">
+                    <button
+                      type="submit"
+                      class="btn btn-primary px-5 py-2 fw-semibold"
+                      style="min-width: 250px"
+                    >
+                      Add Product
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer py-5">
+      <div class="container">
+        <div class="row g-4 py-4">
+          <div class="col-12 col-lg-4">
+            <h6 class="footer-title text-black mb-3">Categories</h6>
+            <div class="row">
+              <div class="col-6 d-flex flex-column gap-2">
+                <a href="#" class="secondary-link">Vegetables &amp; Fruits</a>
+                <a href="#" class="secondary-link"
+                  >Breakfast &amp; instant food</a
+                >
+                <a href="#" class="secondary-link">Bakery &amp; Biscuits</a>
+                <a href="#" class="secondary-link">Atta, rice &amp; dal</a>
+                <a href="#" class="secondary-link">Sauces &amp; spreads</a>
+                <a href="#" class="secondary-link">Organic &amp; gourmet</a>
+                <a href="#" class="secondary-link">Baby care</a>
+                <a href="#" class="secondary-link">Cleaning essentials</a>
+                <a href="#" class="secondary-link">Personal care</a>
+              </div>
+
+              <div class="col-6 d-flex flex-column gap-2">
+                <a href="#" class="secondary-link">Dairy, bread &amp; eggs</a>
+                <a href="#" class="secondary-link">Cold drinks &amp; juices</a>
+                <a href="#" class="secondary-link">Tea, coffee &amp; drinks</a>
+                <a href="#" class="secondary-link">Masala, oil &amp; more</a>
+                <a href="#" class="secondary-link">Chicken, meat &amp; fish</a>
+                <a href="#" class="secondary-link">Paan corner</a>
+                <a href="#" class="secondary-link">Pharma &amp; wellness</a>
+                <a href="#" class="secondary-link">Home &amp; office</a>
+                <a href="#" class="secondary-link">Pet care</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-8">
+            <div class="row g-4">
+              <div class="col-6 col-sm-6 col-md-3">
+                <h6 class="footer-title text-black mb-3">Get to know us</h6>
+                <div class="d-flex flex-column gap-2">
+                  <a href="#" class="secondary-link">Company</a>
+                  <a href="#" class="secondary-link">About</a>
+                  <a href="#" class="secondary-link">Blog</a>
+                  <a href="#" class="secondary-link">Help Center</a>
+                  <a href="#" class="secondary-link">Our Value</a>
+                </div>
+              </div>
+
+              <div class="col-6 col-sm-6 col-md-3">
+                <h6 class="footer-title text-black mb-3">For Consumers</h6>
+                <div class="d-flex flex-column gap-2">
+                  <a href="#" class="secondary-link">Payments</a>
+                  <a href="#" class="secondary-link">Shipping</a>
+                  <a href="#" class="secondary-link">Product Returns</a>
+                  <a href="#" class="secondary-link">FAQ</a>
+                  <a href="#" class="secondary-link">Shop Checkout</a>
+                </div>
+              </div>
+
+              <div class="col-6 col-sm-6 col-md-3">
+                <h6 class="footer-title text-black mb-3">Become a Shopper</h6>
+                <div class="d-flex flex-column gap-2">
+                  <a href="#" class="secondary-link">Shopper Opportunities</a>
+                  <a href="#" class="secondary-link">Become a Shopper</a>
+                  <a href="#" class="secondary-link">Earnings</a>
+                  <a href="#" class="secondary-link">Ideas &amp; Guides</a>
+                  <a href="#" class="secondary-link">New Retailers</a>
+                </div>
+              </div>
+
+              <div class="col-6 col-sm-6 col-md-3">
+                <h6 class="footer-title text-black mb-3">Freshcart programs</h6>
+                <div class="d-flex flex-column gap-2">
+                  <a href="#" class="secondary-link">Freshcart programs</a>
+                  <a href="#" class="secondary-link">Gift Cards</a>
+                  <a href="#" class="secondary-link">Promos &amp; Coupons</a>
+                  <a href="#" class="secondary-link">Freshcart Ads</a>
+                  <a href="#" class="secondary-link">Careers</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-top py-4">
+          <div class="text-secondary align-items-center row">
+            <div class="col-md-6">© 2025 FreshCart. All rights reserved.</div>
+            <div
+              class="col-md-6 d-flex justify-content-md-end mt-3 mt-md-0 align-items-center gap-2"
+            >
+              <span>Follow us on</span>
+              <a href="#" class="footer-icon rounded-3">
+                <i class="bi bi-facebook"></i>
+              </a>
+              <a href="#" class="footer-icon rounded-3">
+                <i class="bi bi-twitter-x"></i>
+              </a>
+              <a href="#" class="footer-icon rounded-3">
+                <i class="bi bi-instagram"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="../js/app.js"></script>
+    <script src="../js/products-object.js"></script>
+    <script src="../js/products.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>

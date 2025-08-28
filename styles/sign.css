@@ -1,0 +1,43 @@
+.login-section {
+  margin: 5rem 0;
+}
+
+@media (max-width: 992px) {
+  .login-section {
+    margin: 2rem 0;
+  }
+}
+
+#passwordToggle {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#passwordToggle:hover {
+  cursor: pointer;
+}
+
+.form-control.is-invalid + span #passwordToggle,
+.was-validated .form-control:invalid + span #passwordToggle {
+  right: 30px !important;
+  top: 30% !important;
+}
+
+.form-control.is-valid + span #passwordToggle,
+.was-validated .form-control:valid + span #passwordToggle {
+  right: 30px !important;
+  top: 49% !important;
+}
+
+.form-check-input:focus {
+  border-color: #85d685;
+  box-shadow: 0 0 0 0.25rem rgba(10, 173, 10, 0.25);
+  outline: 0;
+}
+
+.form-check-input:checked {
+  border-color: #0aad0a;
+  background-color: #0aad0a;
+}

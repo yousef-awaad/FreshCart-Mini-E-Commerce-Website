@@ -1,5 +1,5 @@
 <div align="center">
-	<h3><a href="https://yousef-awaad.github.io/Portfolio-Example/">Live Preview</a></h3>
+	<h3><a href="https://yousef-awaad.github.io/FreshCart-Mini-E-Commerce-Website/">Live Preview</a></h3>
 </div>
 
 > ***Note: If you download this project, open it using the "Live Server" extension in VS Code enable sign-in functionality and proper local storage operations.***
